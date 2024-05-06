@@ -1,0 +1,71 @@
+
+# HR-Dashboard 
+
+### Dashboard Link : 
+
+## The Situation
+
+Creat dashboard that only looked into the attrition in the organization.
+
+## Project Situation
+
+The dataset might be need a bit cleaning, push it into power query and having it cleaned and transformed.
+
+###  Insight needed in the dashboard :
+
+- Categorize enplyees dictances from home into (Far-away, Far and very Far):
+- Break the emplyees work years into groups with interval of 10 years.
+- Transaform the job satisfaction from number (1,2,3,..) to something more readable.
+- Creat an age-bucket for the emplyees (age column).
+-Show necessary KPI in your dashboard.
+
+### Steps followed :
+
+- Step 01 : Load data into Power BI Desktop, dataset is a excel file.
+- Step 02 : Open power query editor & in view tab under Data preview section, check "column distribution", "column quality" & "column profile" options.
+- Step 03 : Also since by default, profile will be opened only for 1000 rows so you need to select "column profiling based on entire dataset".
+
+
+
+Following DAX expression was written for the dashboard
+- Measure 01 : New measure was created to find total count of emplyees.
+
+        Total Employees = COUNTROWS(FTable)
+
+ ![Total Emplyees](https://github.com/Hyder3011/Portfolio/assets/117454367/d1e10f4d-8c5a-450c-8dd4-97e2305fcb8f)
+
+- Measure 02  : Total Attrition:
+
+        Total Attrition = 
+        CALCULATE([Total Employees,
+        FTable[Attrition]= "Yes"
+        )
+
+Measure 03  : Total Attrition % :
+
+        Attrition % = DIVIDE([Total Attrition],[Total Employees],0)
+
+- Measure 04  : Total Male Attrition:
+
+        Male Attrition = 
+        CALCULATE(
+        [Total Attrition],
+        FTable[Gender]="Male"
+        )
+- Measure 04 : Total Female Attrition:
+
+        Male Attrition = 
+        CALCULATE(
+        [Total Attrition],
+        FTable[Gender]="Female"
+        )
+
+- Measure 05 : Total Male Attrition % :
+
+        Male Attrition % = DIVIDE([Male Attrition],[Total Attrition],0)
+
+- Measure 06 : Total Female Attrition % :
+
+        Female Attrition % = DIVIDE([Female Attrition],[Total Attrition],0)    
+
+![M-F Attrition](https://github.com/Hyder3011/Portfolio/assets/117454367/ec76623d-2bf6-4b17-ba4e-5d6302cf6401)
